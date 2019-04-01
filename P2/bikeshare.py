@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import time
 import pandas as pd
 
@@ -26,7 +27,7 @@ def get_filters():
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
         month = input("Select month from {},{},{},{},{} or {}:".format(*months)).strip().lower()
-        if city in months or month == 'all':
+        if month in months or month == 'all':
             break
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
@@ -75,16 +76,16 @@ def time_stats(df):
     start_time = time.time()
 
     # TO DO: display the most common month
-    print('the most common month is %s'%df['month'].mode()[0])
+    print("the most common month is {}".format(df['month'].mode()[0]))
 
     # TO DO: display the most common day of week
-    print('the most common day of week is %s'%df['day_of_week'].mode()[0])
+    print("the most common day of week is {}".format(df['day_of_week'].mode()[0]))
 
     # TO DO: display the most common start hour
-    print('the most common start hour is %s'%df['hour'].mode()[0])
+    print("the most common start hour is {}".format(df['hour'].mode()[0]))
 
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took {} seconds.".format((time.time() - start_time)))
     print('-'*40)
 
 
