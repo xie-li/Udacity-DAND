@@ -1,14 +1,13 @@
 import time
 import pandas as pd
-import numpy as np
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 months = ['january', 'february', 'march', 'april', 'may', 'june']
+days = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
 
-
-def get_filters(city:str,month:str,day:str):
+def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
 
@@ -19,26 +18,26 @@ def get_filters(city:str,month:str,day:str):
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    if city.lower()not in CITY_DATA.keys() and city.lower() != 'all':
-        raise Exception('输入的城市不在"chicago","new york city","washington"内')
+    while True:
+        city = input("Select a city from {}, {} or {}:".format(*CITY_DATA.keys())).strip().lower()
+        if city in CITY_DATA.keys():
+            break
+    
     # TO DO: get user input for month (all, january, february, ... , june)
-    if month.lower() not in months and month.lower()!='all':
-        raise Exception("输入的日期不在['january', 'february', 'march', 'april', 'may', 'june','july','august','september','october','november','december']内")
+    while True:
+        month = input("Select month from {},{},{},{},{} or {}:".format(*months)).strip().lower()
+        if city in months or month == 'all':
+            break
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    days = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday','all']
-    if day.lower() not in days:
-            raise Exception("输入的日期不在['monday','tuesday','wednesday','thursday','friday','saturday','sunday']内")
+    
+    while True:
+        day = input("Select month from {},{},{},{}.{},{} or {}:".format(*days)).strip().lower()
+        if day in days or day == 'all':
+            break
 
     print('-'*40)
     return city, month, day
-
-def test_get_filters():
-    city, month, day = get_filters('Chicago','January','Monday')
-    assert city == 'Chicago'
-    assert month == 'January'
-    assert day == 'Monday'
-
 
 def load_data(city, month, day):
     """
@@ -159,24 +158,19 @@ def user_stats(df):
 
 def main():
     while True:
-        try:
-            city = input('please input city name:')
-            month = input('please input the month to filter by, or "all" to apply no month filter:')
-            day = input('please input the day of week to filter by, or "all" to apply no day filter:')
-            city, month, day = get_filters(city,month,day)
-            df = load_data(city, month, day)
+        
+        city, month, day = get_filters()
+        df = load_data(city, month, day)
 
-            time_stats(df)
-            station_stats(df)
-            trip_duration_stats(df)
-            user_stats(df)
-        except Exception as e:
-            print(e)
-        finally:
-            restart = input('\nWould you like to restart? Enter yes or no.\n')
-            if restart.lower() != 'yes':
-                break
+        time_stats(df)
+        station_stats(df)
+        trip_duration_stats(df)
+        user_stats(df)
+        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        if restart.lower() != 'yes':
+            break
 
 
 if __name__ == "__main__":
 	main()
+
