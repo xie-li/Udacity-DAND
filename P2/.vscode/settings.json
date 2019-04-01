@@ -1,0 +1,10 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.pythonPath": "/anaconda3/envs/py36/bin/python",
+    "python.unitTest.pyTestArgs": [
+        "__pycache__"
+    ],
+    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "python.unitTest.pyTestEnabled": true
+}
