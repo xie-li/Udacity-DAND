@@ -13149,16 +13149,17 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>假设集设为：</strong></p>
+<p><strong>假设检验问题：在相同大小的列表中，文字与墨色名称是否相同对参与者全部说出打印颜色耗时是否有差异性</strong></p>
+<p><strong>指定假设集：</strong></p>
 <ol>
-<li>一致文字条件下，所有参与者说出墨色名称所消耗平均时间，记为$miu_{equal}$  </li>
-<li>不一致文字条件下，所有参与者说出墨色名称所消耗平均时间，记为$miu_{diff}$  </li>
+<li>墨色与文字相同，说出墨色名称所消耗平均时间的总体均值，记为$miu_{equal}$  </li>
+<li>墨色与文字不同，说出墨色名称所消耗平均时间的总体均值，记为$miu_{diff}$  </li>
 </ol>
-<p><strong>null hypothesis:</strong><br>
+<p><strong>null hypothesis:不一致文字条件下不会影响参与者说出打印颜色耗时</strong><br>
 $H_0$ : $miu_{equal} = miu_{diff}$</p>
-<p><strong>alternavite hypothesis:</strong></p>
+<p><strong>alternavite hypothesis:不一致文字条件下会影响参与者说出打印颜色耗时</strong></p>
 <p>$H_1$ : $miu_{equal} \neq miu_{diff}$</p>
-<p><strong>根据下面数据获取及分析结果，可以看到数据的总量为24&lt;30，所以选择t检验，根据我们设定的零假设和对立假设，采用two-tailed校验</strong></p>
+<p><strong>因为此次选择样本数量为24（少于30），且进行的是同一样本数据不同条件的比对，它们是相关样本，所以选择配对t检验，备选假设中为不等于，需要找出参数的变化，所以选择双尾检验</strong></p>
 
 </div>
 </div>
@@ -13227,7 +13228,7 @@ $H_0$ : $miu_{equal} = miu_{diff}$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 在这里执行你的分析</span>
@@ -13239,7 +13240,6 @@ $H_0$ : $miu_{equal} = miu_{diff}$</p>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">stats</span>
 <span class="c1"># 数据集可视化常用功能包</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;simhei&#39;</span><span class="p">]</span>  <span class="c1"># 设置加载的字体名</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;导入完成&quot;</span><span class="p">)</span>
@@ -13270,7 +13270,7 @@ $H_0$ : $miu_{equal} = miu_{diff}$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#读取数据集</span>
@@ -13298,9 +13298,9 @@ $H_0$ : $miu_{equal} = miu_{diff}$</p>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>    Congruent  Incongruent
-18     11.344       17.425
-16     18.495       25.139
-5      12.238       20.878
+9      14.480       26.282
+12     15.073       17.510
+17     10.639       20.429
 ----------------------------------------
        Congruent  Incongruent
 count  24.000000    24.000000
@@ -13321,53 +13321,6 @@ dtypes: float64(2)
 memory usage: 464.0 bytes
 None
 ----------------------------------------
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#均值</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mean:&#39;</span><span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
-<span class="c1">#中位数</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;median:&#39;</span><span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">median</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span><span class="n">df</span><span class="o">.</span><span class="n">median</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
-<span class="c1">#方差</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;variance:&#39;</span><span class="p">,(((</span><span class="n">df</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))[</span><span class="mi">0</span><span class="p">],(((</span><span class="n">df</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))[</span><span class="mi">1</span><span class="p">])</span>
-<span class="c1">#标准差</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;std:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((((</span><span class="n">df</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))[</span><span class="mi">0</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((((</span><span class="n">df</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))[</span><span class="mi">1</span><span class="p">]))</span>
-<span class="c1">#极值</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;range:&#39;</span><span class="p">,(</span><span class="n">df</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">min</span><span class="p">())[</span><span class="mi">0</span><span class="p">],(</span><span class="n">df</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">min</span><span class="p">())[</span><span class="mi">1</span><span class="p">])</span>
-<span class="c1">#IQR</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;IQR:&#39;</span><span class="p">,(</span><span class="n">df</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="o">.</span><span class="mi">75</span><span class="p">)</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="o">.</span><span class="mi">25</span><span class="p">))[</span><span class="mi">0</span><span class="p">],((</span><span class="n">df</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="o">.</span><span class="mi">75</span><span class="p">)</span><span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="o">.</span><span class="mi">25</span><span class="p">))[</span><span class="mi">1</span><span class="p">]))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>mean: 14.051125000000004 22.01591666666667
-median: 14.3565 21.0175
-variance: 12.141152859375 22.05293382638889
-std: 3.4844157127666326 4.696055134513317
-range: 13.698000000000002 19.568
-IQR: 4.3054999999999986 5.33475
 </pre>
 </div>
 </div>
@@ -13474,7 +13427,7 @@ This will give the p-value for the paired t-test.</li>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 在这里执行统计检验</span>
@@ -13512,7 +13465,7 @@ sstd=4.86,se=0.99
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[60]:</div>
+    <div class="prompt output_prompt">Out[71]:</div>
 
 
 
@@ -13545,7 +13498,7 @@ or, equivalently ¯d ± (t
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2</span> <span class="o">=</span> <span class="n">sstd</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -13562,13 +13515,13 @@ or, equivalently ¯d ± (t
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[61]:</div>
+    <div class="prompt output_prompt">Out[69]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(-6.95747679295946, -8.97210654037387)</pre>
+<pre>(-6.935811628938246, -8.993771704395083)</pre>
 </div>
 
 </div>
@@ -13579,7 +13532,7 @@ or, equivalently ¯d ± (t
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#参考：https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.stats.ttest_rel.html</span>
@@ -13597,7 +13550,7 @@ or, equivalently ¯d ± (t
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[53]:</div>
+    <div class="prompt output_prompt">Out[70]:</div>
 
 
 
